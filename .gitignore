@@ -4,6 +4,7 @@ generated-docs/
 node_modules/
 output/
 output.bak/
+/.purmeta/
 tmp/
 /*.log
 tags
