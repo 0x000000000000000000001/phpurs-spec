@@ -1,10 +1,10 @@
 <?php
 
-$_startsWith = function ($subs, $str) use (&$_startsWith) {
+$_startsWith = function ($subs, $str) {
     return str_starts_with($str, $subs);
 };
 
-$_endsWith = function ($subs, $str) use (&$_endsWith) {
+$_endsWith = function ($subs, $str) {
     return str_ends_with($str, $subs);
 };
 

@@ -1,7 +1,7 @@
 <?php
 
-$exports['write'] = function($s) {
-    return function() use ($s) {
+$exports['write'] = function ($s) {
+    return function () use ($s) {
         echo $s;
     };
 };

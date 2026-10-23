@@ -1,7 +1,7 @@
 <?php
 
-$exports['exit'] = function($code) {
-    return function() use ($code) {
+$exports['exit'] = function ($code) {
+    return function () use ($code) {
         exit($code);
     };
 };

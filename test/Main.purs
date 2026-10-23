@@ -9,7 +9,6 @@ import Effect.Aff (Milliseconds(..), launchAff_)
 import Effect.Class (liftEffect)
 import Options.Applicative as Opt
 import Record (merge)
-import Test.Integration (integrationSpecs)
 import Test.Spec.AssertionSpec (assertionSpec)
 import Test.Spec.HoistSpec (hoistSpecSpec)
 import Test.Spec.HookSpec (hookSpec)
@@ -25,15 +24,15 @@ main = launchAff_ do
   config <- liftEffect $
     Config.fromCommandLine' defaultConfig (Config.commandLineOptionParsers <> [debug, accept])
     <#> _ { timeout = Just $ Milliseconds 30000.0 }
-  integration <-
-    integrationSpecs { debug: config.debug, accept: config.accept }
+  -- The upstream integration suite shells out to `spago` through
+  -- Node.ChildProcess. That harness is JavaScript-specific; the PHP target
+  -- exercises the unit suites below.
   liftEffect $
     runSpecAndExitProcess'
       { defaultConfig: config
       , parseCLIOptions: false
       }
-      [specReporter] $
-      pureSpecs *> integration
+      [specReporter] pureSpecs
   where
     pureSpecs = do
       runnerSpec
